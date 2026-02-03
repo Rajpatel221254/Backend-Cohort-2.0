@@ -1,9 +1,10 @@
 const express = require("express");
 const noteModel = require("../models/note.model");
+const cors = require('cors')
 
 require("dotenv").config();
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 
 /*
