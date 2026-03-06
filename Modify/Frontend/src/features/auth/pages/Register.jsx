@@ -66,8 +66,8 @@ const Register = () => {
               type="password"
             />
 
-            <button className="register-button" type="submit" disabled={loading}>
-              {loading ? "Creating account..." : "Create Account"}
+            <button className="register-button" type="submit">
+              Create Account
             </button>
           </form>
 

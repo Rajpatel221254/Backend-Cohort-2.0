@@ -53,8 +53,8 @@ const Login = () => {
               type="password"
             />
 
-            <button className="login-button" type="submit" disabled={loading}>
-              {loading ? "Signing in..." : "Sign In"}
+            <button className="login-button" type="submit">
+              Sign In
             </button>
           </form>
 
