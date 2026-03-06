@@ -1,9 +1,9 @@
 const userModel = require("../models/user.model");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 async function registerController(req, res) {
-  const { username, email, password, bio, imgUrl } = req.body;
+  const { email, username, password, bio, imgUrl } = req.body;
 
   const isUserAlreadyExist = await userModel.findOne({
     $or: [
@@ -19,24 +19,25 @@ async function registerController(req, res) {
   if (isUserAlreadyExist) {
     return res.status(409).json({
       message:
-        "User already exist with this " +
-        (isUserAlreadyExist.email == email ? "Email" : "Username"),
+        "User already exist with " +
+        (isUserAlreadyExist.email === email ? "Email" : "Username"),
     });
   }
 
   const hash = await bcrypt.hash(password, 10);
 
   const user = await userModel.create({
-    username,
-    email,
-    bio,
-    imgUrl,
+    username: username,
+    email: email,
     password: hash,
+    bio: bio,
+    imgUrl,
   });
 
   const token = jwt.sign(
     {
       id: user._id,
+      username: user.username,
     },
     process.env.JWT_SECRET,
     { expiresIn: "1d" },
@@ -45,33 +46,33 @@ async function registerController(req, res) {
   res.cookie("token", token);
 
   res.status(201).json({
-    message: "User registered sucessfully",
+    message: "User registered succesfully",
     user: {
-      username: user.username,
       email: user.email,
+      username: user.username,
       bio: user.bio,
-      profileImage: user.profileImage,
+      imgUrl: user.imgUrl,
     },
   });
 }
 
 async function loginController(req, res) {
-  const { username, email, password } = req.body;
+  const { email, password, username } = req.body;
 
   const user = await userModel.findOne({
     $or: [
       {
-        email: email,
+        username: username,
       },
       {
-        username: username,
+        email: email,
       },
     ],
   });
 
   if (!user) {
-    res.status(404).json({
-      message: "user not found",
+    return res.status(404).json({
+      message: "User not found",
     });
   }
 
@@ -86,6 +87,7 @@ async function loginController(req, res) {
   const token = jwt.sign(
     {
       id: user._id,
+      username: user.username,
     },
     process.env.JWT_SECRET,
     { expiresIn: "1d" },
@@ -94,7 +96,7 @@ async function loginController(req, res) {
   res.cookie("token", token);
 
   res.status(200).json({
-    message: "User login sucessfully",
+    message: "User login succesfully",
     user: {
       username: user.username,
       email: user.email,
