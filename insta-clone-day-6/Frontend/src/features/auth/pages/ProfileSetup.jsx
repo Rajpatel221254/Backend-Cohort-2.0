@@ -1,11 +1,14 @@
 import { useState } from "react";
 import "../styles/profileSetup.scss";
 import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router";
 
 const ProfileSetup = () => {
   const [fullname, setFullname] = useState("");
   const [bio, setBio] = useState("");
   const [file, setFile] = useState(null);
+
+  const navigate = useNavigate()
 
   const { handleUpdate, loading, user } = useAuth();
 
@@ -18,7 +21,7 @@ const ProfileSetup = () => {
     formdata.append("profilePic", file);
 
     handleUpdate(formdata).then((res) => {
-      console.log(user);
+      navigate('/')
     });
   };
 

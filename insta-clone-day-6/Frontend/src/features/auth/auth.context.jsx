@@ -48,9 +48,26 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const handleGetMe = async () => {
+    setLoading(true)
+    try {
+      const response = await getMe()
+      setUser(response.user)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    // Only try to fetch the user if there's a token (or handleGetMe relies on httpOnly cookies)
+    handleGetMe();
+  }, [])
+
   return (
     <AuthContext.Provider
-      value={{ user, loading, handleLogin, handleRegister, handleUpdate }}
+      value={{ user, loading, handleLogin, handleRegister, handleUpdate, handleGetMe }}
     >
       {children}
     </AuthContext.Provider>

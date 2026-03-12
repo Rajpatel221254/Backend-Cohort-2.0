@@ -1,43 +1,59 @@
 .auth {
   min-height: 100vh;
-  background: linear-gradient(135deg, #eef2ff, #e0f2fe);
+  // An animated rich gradient background
+  background: linear-gradient(-45deg, #1e3c72, #2a5298, #6a11cb, #2575fc);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
 
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
   .card {
-    width: 400px;
-    background: #ffffff;
-    padding: 45px 35px;
-    border-radius: 24px;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.08);
+    width: 420px;
+    // Glassmorphism effect
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 50px 40px;
+    border-radius: 28px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2), 
+                inset 0 0 0 1px rgba(255, 255, 255, 0.4);
     text-align: center;
-    animation: fadeIn 0.4s ease-in-out;
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .brand {
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 
     h1 {
-      font-size: 34px;
-      font-weight: 700;
-      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      font-size: 38px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      // Vibrant text gradient
+      background: linear-gradient(135deg, #FF6B6B, #5F27CD, #0ABDE3);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     p {
-      font-size: 14px;
-      color: #777;
+      font-size: 15px;
+      color: #6c757d;
+      font-weight: 500;
     }
   }
 
   .form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 22px;
   }
 
   .inputGroup {
@@ -47,17 +63,23 @@
 
     input {
       width: 100%;
-      padding: 14px 16px;
-      border-radius: 14px;
-      border: 1px solid #e5e7eb;
-      background: #f9fafb;
-      font-size: 14px;
-      transition: all 0.3s ease;
+      padding: 16px 20px;
+      border-radius: 16px;
+      border: 2px solid transparent;
+      background: #f1f3f5;
+      font-size: 15px;
+      color: #212529;
+      font-weight: 500;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+      &::placeholder {
+        color: #adb5bd;
+      }
 
       &:focus {
-        border-color: #6366f1;
+        border-color: rgba(95, 39, 205, 0.5);
         background: #ffffff;
-        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+        box-shadow: 0 0 0 4px rgba(95, 39, 205, 0.1);
         outline: none;
       }
     }
@@ -67,53 +89,62 @@
     position: relative;
 
     input {
-      padding-right: 75px;
+      padding-right: 80px;
     }
 
     .toggleBtn {
       position: absolute;
-      right: 16px;
+      right: 18px;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 600;
-      color: #6366f1;
+      color: #5F27CD;
       cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
       transition: 0.2s;
 
       &:hover {
-        opacity: 0.7;
+        background: rgba(95, 39, 205, 0.08);
       }
     }
   }
 
   .primaryBtn {
-    padding: 14px;
-    border-radius: 14px;
+    padding: 16px;
+    border-radius: 16px;
     border: none;
-    background: linear-gradient(135deg, #6366f1, #3b82f6);
+    background: linear-gradient(135deg, #5F27CD, #0ABDE3);
     color: white;
-    font-weight: 600;
-    font-size: 15px;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.5px;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 20px rgba(95, 39, 205, 0.25);
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 25px rgba(95, 39, 205, 0.35);
+    }
+    
+    &:active {
+      transform: translateY(0);
     }
   }
 
   .divider {
-    margin: 25px 0 15px;
+    margin: 30px 0 20px;
     position: relative;
     text-align: center;
 
     span {
-      background: #fff;
-      padding: 0 14px;
-      font-size: 13px;
-      color: #999;
+      background: #ffffff;
+      padding: 0 16px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #adb5bd;
       position: relative;
       z-index: 2;
     }
@@ -123,7 +154,7 @@
       position: absolute;
       width: 100%;
       height: 1px;
-      background: #e5e7eb;
+      background: #e9ecef;
       top: 50%;
       left: 0;
       z-index: 1;
@@ -131,18 +162,19 @@
   }
 
   .switchText {
-    font-size: 14px;
-    color: #666;
+    font-size: 15px;
+    color: #495057;
 
     .authToggle {
-      margin-left: 6px;
-      font-weight: 600;
-      color: #6366f1;
+      margin-left: 8px;
+      font-weight: 700;
+      color: #5F27CD;
       text-decoration: none;
       transition: 0.2s;
 
       &:hover {
         text-decoration: underline;
+        color: #341f97;
       }
     }
   }

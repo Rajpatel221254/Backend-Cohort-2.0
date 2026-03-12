@@ -3,11 +3,12 @@ const likeModel = require("../models/like.model");
 const jwt = require("jsonwebtoken");
 const imagekit = require("../config/imagekit.config");
 const { toFile } = require("@imagekit/nodejs");
+const user = require('../models/user.model')
 
 async function createPostController(req, res) {
   const file = await imagekit.files.upload({
     file: await toFile(Buffer.from(req.file.buffer), "file"),
-    fileName: "image",
+    fileName: "postImage",
     folder: "insta-clone-post-images",
   });
 
@@ -17,9 +18,20 @@ async function createPostController(req, res) {
     user: req.user.id,
   });
 
-  res.status(201).json({
-    message: "post Created succesfully",
-    post,
+   const populatedPost = await post.populate(
+      "user",
+      "username profilePic"
+    );
+
+    res.status(201).json(populatedPost);
+}
+
+async function getAllPostController(req, res) {
+  const posts = await postModel.find().populate("user");
+
+  res.status(200).json({
+    message: "Posts fetch succesfully",
+    posts,
   });
 }
 
@@ -88,4 +100,5 @@ module.exports = {
   createPostController,
   getPostController,
   getPostDetailsController,
+  getAllPostController
 };

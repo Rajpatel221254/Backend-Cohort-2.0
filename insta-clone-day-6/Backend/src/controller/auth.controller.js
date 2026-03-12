@@ -105,6 +105,7 @@ async function userLoginController(req, res) {
       email: user.email,
       bio: user.bio,
       fullname: user.fullname,
+      profilePic: user.profilePic,
     },
   });
 }
@@ -122,12 +123,7 @@ async function getMeController(req, res) {
 
   res.status(200).json({
     message: "User Found",
-    user: {
-      username: user.username,
-      fullname: user.fullname,
-      bio: user.bio,
-      email: user.email,
-    },
+    user
   });
 }
 

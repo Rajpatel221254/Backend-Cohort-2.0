@@ -1,0 +1,23 @@
+.dashboardLayout {
+  min-height: 100vh;
+  padding-inline: 2rem;
+  padding-block: 2rem;
+  background-color: #f0f2f5;
+
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 2rem;
+  max-width: 1440px;
+  margin: 0 auto;
+
+  .contentArea {
+    width: 100%;
+    /* Dashboard specific layout inside contentArea if needed */
+    &.dashboardContent {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 2rem;
+      align-items: start;
+    }
+  }
+}

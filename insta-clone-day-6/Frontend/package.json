@@ -10,11 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@imagekit/react": "^5.0.2",
+    "@remixicon/react": "^4.9.0",
     "axios": "^1.13.5",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router": "^7.13.0",
     "react-toastify": "^11.0.5",
+    "remixicon": "^4.9.1",
     "saas": "^1.0.0"
   },
   "devDependencies": {

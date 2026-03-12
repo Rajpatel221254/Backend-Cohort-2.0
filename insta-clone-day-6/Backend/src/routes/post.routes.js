@@ -4,6 +4,7 @@ const {
   getPostController,
   getPostDetailsController,
   likePostController,
+  getAllPostController
 } = require("../controller/post.controller");
 const identifyUser = require("../middlewares/auth.middleware");
 const upload = require("../middlewares/upload.middleware");
@@ -17,10 +18,17 @@ const postRouter = express.Router();
  */
 postRouter.post(
   "/",
-  upload.single("image"),
+  upload.single("postImage"),
   identifyUser,
   createPostController,
 );
+
+/**
+ * @route GET /api/post/all
+ * @description Get all posts
+ * @access private
+ */
+postRouter.get("/all", identifyUser, getAllPostController);
 
 /**
  * @route GET /api/post
